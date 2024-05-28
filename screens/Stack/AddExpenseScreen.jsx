@@ -17,7 +17,8 @@ export function AddExpenseScreen({navigation, route}) {
             id: Math.round(Math.random() * 100),
             title: "Template expense",
             date: new Date().toISOString(),
-            price: 9.99
+            amount: 9.99,
+            description: "Description"
         }))
         handleClose()
     }

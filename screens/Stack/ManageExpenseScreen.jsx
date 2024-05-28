@@ -16,10 +16,10 @@ export function ManageExpenseScreen({navigation, route}) {
     function handleUpdateExpense() {
         dispatch(updateExpense({
             id: expenseId,
-            title: "Template expense 2",
             date: new Date().toISOString(),
-            price: 10.99
-        }))
+            amount: 10.99,
+            description: "New description"
+        },))
         handleClose()
     }
 

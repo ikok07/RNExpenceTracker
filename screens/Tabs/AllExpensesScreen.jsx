@@ -1,8 +1,8 @@
-import {FlatList, StyleSheet, Text, View} from "react-native";
-import Expense from "../../model/Expense";
+import {FlatList, StyleSheet, View} from "react-native";
 import ExpenseRowItem from "../../Components/ui/ExpenseRowItem";
 import SummaryRow from "../../Components/ui/SummaryRow";
 import {useSelector} from "react-redux";
+import ExpensesList from "../../Components/ui/ExpensesList";
 
 export default function AllExpensesScreen() {
     const expenses = useSelector(state => state.expenses.added)
@@ -12,11 +12,10 @@ export default function AllExpensesScreen() {
             label="Total"
             amount={expenses.reduce((sum, expense) => sum + expense.price, 0)}
         />
-        <View>
-            <FlatList contentContainerStyle={styles.list} data={expenses} renderItem={({item}) => {
-                return <ExpenseRowItem item={item}/>
-            }}/>
-        </View>
+        <ExpensesList
+            items={expenses}
+            fallbackText="No registered expenses found!"
+        />
     </View>
 }
 
@@ -28,7 +27,4 @@ const styles = StyleSheet.create({
         marginVertical: 25,
         gap: 15
     },
-    list: {
-        gap: 15
-    }
 })

@@ -3,6 +3,7 @@ import SummaryRow from "../../Components/ui/SummaryRow";
 import {useSelector} from "react-redux";
 import {addDays} from "date-fns";
 import ExpenseRowItem from "../../Components/ui/ExpenseRowItem";
+import ExpensesList from "../../Components/ui/ExpensesList";
 
 export default function RecentExpensesScreen() {
 
@@ -11,13 +12,12 @@ export default function RecentExpensesScreen() {
     return <View style={styles.rootContainer}>
         <SummaryRow
             label="Last 7 Days"
-            amount={expenses.reduce((sum, expense) => sum + expense.price, 0)}
+            amount={expenses.reduce((sum, expense) => sum + expense.amount, 0)}
         />
-        <View>
-            <FlatList contentContainerStyle={styles.list} data={expenses} renderItem={({item}) => {
-                return <ExpenseRowItem item={item}/>
-            }}/>
-        </View>
+        <ExpensesList
+            items={expenses}
+            fallbackText="No expenses registered for the last 7 days."
+        />
     </View>
 }
 

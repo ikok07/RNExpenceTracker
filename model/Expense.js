@@ -3,6 +3,7 @@ export default class Expense {
         this.id = id
         this.title = title
         this.date = date
-        this.price = price
+        this.amount = price
+        this.descritpion = description
     }
 }
