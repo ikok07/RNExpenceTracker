@@ -4,7 +4,7 @@ import {Colors} from "../../constants/colors";
 export default function SummaryRow({label, amount}) {
     return <View style={styles.rootContainer}>
         <Text style={styles.label}>{label}</Text>
-        <Text style={styles.amount}>{amount}$</Text>
+        <Text style={styles.amount}>{amount.toFixed(2)}$</Text>
     </View>
 }
 

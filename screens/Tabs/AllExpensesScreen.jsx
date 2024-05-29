@@ -2,9 +2,16 @@ import {StyleSheet, View} from "react-native";
 import SummaryRow from "../../Components/ui/SummaryRow";
 import {useSelector} from "react-redux";
 import ExpensesList from "../../Components/ui/ExpensesList";
+import {addDays} from "date-fns";
+import LoadingOverlay from "../../Components/ui/LoadingOverlay";
+import ErrorOverlay from "../../Components/ui/ErrorOverlay";
 
 export default function AllExpensesScreen() {
-    const expenses = useSelector(state => state.expenses.added)
+    const {added, status, error} = useSelector(state => state.expenses)
+
+    let expenses = [...added].sort((a, b) => new Date(b.date).getDate() - new Date(a.date).getDate())
+    if (status === "loading") return <LoadingOverlay />
+    if (status === "failed") return <ErrorOverlay message={error} />
 
     return <View style={styles.rootContainer}>
         <SummaryRow

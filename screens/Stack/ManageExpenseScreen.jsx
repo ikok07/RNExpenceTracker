@@ -1,9 +1,9 @@
 import {Pressable, StyleSheet, View} from "react-native";
 import ExpenseForm from "../../Components/ManageExpense/ExpenseForm";
 import {useDispatch, useSelector} from "react-redux";
-import expenses, {addExpense, removeExpense, updateExpense} from "../../store/expenses";
 import {Ionicons} from "@expo/vector-icons";
 import {Colors} from "../../constants/colors";
+import {deleteExpense, storeExpense, updateExpense} from "../../util/http";
 
 export function ManageExpenseScreen({navigation, route}) {
     const expenseId = route.params?.id
@@ -16,23 +16,20 @@ export function ManageExpenseScreen({navigation, route}) {
         navigation.goBack()
     }
 
-    function confirmHandler(data) {
+    async function confirmHandler(data) {
         if (isEditing) {
             dispatch(updateExpense({
                 id: expenseId,
                 ...data
             }))
         } else {
-            dispatch(addExpense({
-                id: Math.round(Math.random() * 100),
-                ...data
-            }))
+            dispatch(storeExpense(data))
         }
         handleClose()
     }
 
-    function handleDeleteExpense() {
-        dispatch(removeExpense({id: expenseId}))
+    function deleteExpenseHandler() {
+        dispatch(deleteExpense(expenseId))
         handleClose()
     }
 
@@ -47,7 +44,7 @@ export function ManageExpenseScreen({navigation, route}) {
         <View style={styles.deleteSection}>
             {isEditing && <Pressable
                 style={({pressed}) => [styles.deleteButton, pressed ? styles.pressed : {}]}
-                onPress={handleDeleteExpense}
+                onPress={deleteExpenseHandler}
             >
                 <Ionicons name="trash" size={48} color="red"/>
             </Pressable>}

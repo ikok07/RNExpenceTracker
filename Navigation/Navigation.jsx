@@ -8,10 +8,22 @@ import {Colors} from "../constants/colors";
 import RecentExpensesScreen from "../screens/Tabs/RecentExpensesScreen";
 import RecentExpensesNavigation from "./RecentExpensesNavigation";
 import {ManageExpenseScreen} from "../screens/Stack/ManageExpenseScreen";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {fetchExpenses} from "../util/http";
 
 const TabStack = createBottomTabNavigator()
 
 export default function Navigation() {
+    const dispatch = useDispatch()
+    const {status} = useSelector(state => state.expenses)
+
+    useEffect(() => {
+        if (status === "idle") {
+            dispatch(fetchExpenses())
+        }
+    }, []);
+
     return <NavigationContainer>
         <TabStack.Navigator
             screenOptions={{
