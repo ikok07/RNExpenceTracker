@@ -2,14 +2,13 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Colors} from "../constants/colors";
 import RecentExpensesScreen from "../screens/Tabs/RecentExpensesScreen";
 import {HeaderButton} from "../Components/ui/HeaderButton";
-import {AddExpenseScreen} from "../screens/Stack/AddExpenseScreen";
 import {ManageExpenseScreen} from "../screens/Stack/ManageExpenseScreen";
 
 const Stack = createNativeStackNavigator()
 
 export default function RecentExpensesNavigation({navigation}) {
     function handleOpenManageExpense() {
-        navigation.navigate("addExpense")
+        navigation.navigate("manageExpense")
     }
 
     return <Stack.Navigator
@@ -28,20 +27,12 @@ export default function RecentExpensesNavigation({navigation}) {
             }}
         />
         <Stack.Screen
-            name="addExpense"
-            component={AddExpenseScreen}
-            options={{
-                title: "Add expense",
-                presentation: "modal"
-            }}
-        />
-        <Stack.Screen
             name="manageExpense"
             component={ManageExpenseScreen}
-            options={{
-                title: "Manage expense",
+            options={({route}) => ({
+                title: `${route.params?.id ? "Manage" : "Add"} expense`,
                 presentation: "modal"
-            }}
+            })}
         />
     </Stack.Navigator>
 }

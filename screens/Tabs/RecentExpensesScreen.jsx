@@ -1,13 +1,12 @@
-import {FlatList, StyleSheet, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import SummaryRow from "../../Components/ui/SummaryRow";
 import {useSelector} from "react-redux";
 import {addDays} from "date-fns";
-import ExpenseRowItem from "../../Components/ui/ExpenseRowItem";
 import ExpensesList from "../../Components/ui/ExpensesList";
 
 export default function RecentExpensesScreen() {
 
-    const expenses = useSelector(state => state.expenses.added).filter(exp => new Date(exp.date) > addDays(new Date(), -7))
+    const expenses = useSelector(state => state.expenses.added).filter(exp => new Date(exp.date).getDate() > addDays(new Date(), -7).getDate())
 
     return <View style={styles.rootContainer}>
         <SummaryRow
@@ -20,6 +19,7 @@ export default function RecentExpensesScreen() {
         />
     </View>
 }
+
 
 const styles = StyleSheet.create({
     rootContainer: {

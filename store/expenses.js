@@ -16,7 +16,7 @@ const expensesSlice = createSlice({
             state.added[index].description = action.payload.description
         },
         removeExpense: (state, action) => {
-            state.added.splice(state.added.indexOf(action.payload.id))
+            state.added.splice(state.added.indexOf(action.payload.id), 1)
         }
     }
 })

@@ -1,5 +1,4 @@
-import {FlatList, StyleSheet, View} from "react-native";
-import ExpenseRowItem from "../../Components/ui/ExpenseRowItem";
+import {StyleSheet, View} from "react-native";
 import SummaryRow from "../../Components/ui/SummaryRow";
 import {useSelector} from "react-redux";
 import ExpensesList from "../../Components/ui/ExpensesList";
@@ -10,7 +9,7 @@ export default function AllExpensesScreen() {
     return <View style={styles.rootContainer}>
         <SummaryRow
             label="Total"
-            amount={expenses.reduce((sum, expense) => sum + expense.price, 0)}
+            amount={expenses.reduce((sum, expense) => sum + expense.amount, 0)}
         />
         <ExpensesList
             items={expenses}

@@ -13,7 +13,7 @@ export default function ExpenseRowItem({item}) {
     return <Pressable style={({pressed}) => pressed ? {opacity: 0.85} : {}} onPress={handlePress}>
         <View style={styles.rowContainer}>
             <View style={styles.textContainer}>
-                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.description}>{item.description}</Text>
                 <Text style={styles.date}>{format(new Date(item.date), "yyyy-M-dd")}</Text>
             </View>
             <View style={styles.priceContainer}>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     textContainer: {
         gap: 4
     },
-    title: {
+    description: {
         fontWeight: "bold",
         fontSize: 18,
         color: Colors.quaternaryDark

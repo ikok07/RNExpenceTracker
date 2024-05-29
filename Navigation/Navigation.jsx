@@ -7,6 +7,7 @@ import {Ionicons} from "@expo/vector-icons"
 import {Colors} from "../constants/colors";
 import RecentExpensesScreen from "../screens/Tabs/RecentExpensesScreen";
 import RecentExpensesNavigation from "./RecentExpensesNavigation";
+import {ManageExpenseScreen} from "../screens/Stack/ManageExpenseScreen";
 
 const TabStack = createBottomTabNavigator()
 
