@@ -7,7 +7,7 @@ export const fetchExpenses = createAsyncThunk(
     "expenses/fetch",
     async () => {
         try {
-            const {data} = await axios.get(`${url}/expenses.jso`)
+            const {data} = await axios.get(`${url}/expenses.json`)
 
             const expenses = []
             for (const key in data) {
